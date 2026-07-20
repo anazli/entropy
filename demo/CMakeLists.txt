@@ -6,15 +6,15 @@ FetchContent_Declare(
     GIT_REPOSITORY https://github.com/SFML/SFML.git
     GIT_TAG master
 )
+set(SFML_BUILD_NETWORK OFF CACHE INTERNAL "")
+set(SFML_BUILD_AUDIO   OFF CACHE INTERNAL "")
 set(SFML_BUILD_EXAMPLES OFF CACHE INTERNAL "")
 set(SFML_BUILD_DOC OFF CACHE INTERNAL "")
 FetchContent_MakeAvailable(SFML)
-
-find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
 add_executable(${PROJECT_NAME}
   dummy-demo.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
-target_link_libraries(${PROJECT_NAME} PRIVATE entropy sfml::graphics sfml::window sfml::system)
+target_link_libraries(${PROJECT_NAME} PRIVATE entropy sfml-graphics sfml-window sfml-system)

@@ -41,10 +41,5 @@ if(ENABLE_TESTING)
 endif()
 
 if(PROJECT_IS_TOP_LEVEL)
-    set(PROJECT_DEMO ${PROJECT_NAME}-demo)
-    add_executable(${PROJECT_DEMO} demo/dummy-demo.cpp)
-    target_link_libraries(${PROJECT_DEMO}
-        PRIVATE
-            ${PROJECT_NAME}
-    )
+    add_subdirectory(demo)
 endif()
