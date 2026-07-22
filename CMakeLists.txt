@@ -17,12 +17,12 @@ FetchContent_MakeAvailable(math)
 add_library(${PROJECT_NAME} STATIC "")
 target_sources(${PROJECT_NAME}
     PRIVATE
-        src/dummy.cpp
+        src/particle.cpp
     PUBLIC
         FILE_SET HEADERS
         BASE_DIRS include
         FILES
-            include/engine/dummy.hpp
+            include/engine/particle.hpp
 )
 
 target_include_directories(${PROJECT_NAME}
@@ -31,7 +31,7 @@ target_include_directories(${PROJECT_NAME}
         $<INSTALL_INTERFACE:include>
 )
 target_link_libraries(${PROJECT_NAME}
-    PRIVATE
+    PUBLIC
         math
 )
 

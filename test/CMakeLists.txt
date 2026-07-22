@@ -12,7 +12,7 @@ include(FetchContent)
   include(GoogleTest)
 
  add_executable(${PROJECT_NAME}
-  dummy-test.cpp
+  particle_test.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
