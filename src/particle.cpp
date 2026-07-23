@@ -34,3 +34,5 @@ void Particle::Integrate(float dt) {
   m_position = m_position + m_velocity * dt;
 }
 }  // namespace entropy
+
+void entropy::Particle::ClearAccumulator() { m_force = Vec3f(); }

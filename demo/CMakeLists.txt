@@ -12,9 +12,10 @@ set(SFML_BUILD_EXAMPLES OFF CACHE INTERNAL "")
 set(SFML_BUILD_DOC OFF CACHE INTERNAL "")
 FetchContent_MakeAvailable(SFML)
 
-add_executable(${PROJECT_NAME}
-  dummy-demo.cpp
+set(BALLISTIC_DEMO ballistic-demo)
+add_executable(${BALLISTIC_DEMO}
+  ballistic_demo.cpp
+  ballistic_demo.hpp
 )
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
-target_link_libraries(${PROJECT_NAME} PRIVATE entropy sfml-graphics sfml-window sfml-system)
+target_include_directories(${BALLISTIC_DEMO} PRIVATE ${CMAKE_SOURCE_DIR}/include)
+target_link_libraries(${BALLISTIC_DEMO} PRIVATE entropy sfml-graphics sfml-window sfml-system)

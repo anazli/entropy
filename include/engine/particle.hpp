@@ -5,6 +5,7 @@
 namespace entropy {
 class Particle {
  public:
+  Particle() = default;
   Particle(float inverse_mass, const Vec3f& position, const Vec3f& velocity,
            const Vec3f& acceleration, float damping, const Vec3f& force);
   Vec3f GetPosition() const;
@@ -12,6 +13,7 @@ class Particle {
   Vec3f GetAcceleration() const;
 
   void Integrate(float duration);
+  void ClearAccumulator();
 
  private:
   Vec3f m_position;
