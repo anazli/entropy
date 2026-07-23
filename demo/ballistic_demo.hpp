@@ -17,25 +17,25 @@ class BallisticDemo {
     switch (type) {
       case PISTOL:
         mass = 2.0f;
-        velocity = Vec3f(55.0f, 0.0f, 0.0f);
-        acceleration = Vec3f(0.0f, -1.0f, 0.0f);
+        velocity = Vec3f(45.0f, 0.0f, 0.0f);
+        acceleration = Vec3f(0.0f, -1.f, 0.0f);
         damping = 0.99f;
         break;
       case ARTILLERY:
         mass = 200.0f;
-        velocity = Vec3f(0.0f, 30.0f, 40.0f);  // 50m/s
+        velocity = Vec3f(40.0f, 30.0f, 0.0f);
         acceleration = Vec3f(0.0f, -20.0f, 0.0f);
         damping = 0.99f;
         break;
       case FIREBALL:
         mass = 1.0f;
-        velocity = Vec3f(0.0f, 0.0f, 10.0f);     // 5m/s
-        acceleration = Vec3f(0.0f, 0.6f, 0.0f);  // Floats up
+        velocity = Vec3f(20.0f, 0.0f, 0.0f);
+        acceleration = Vec3f(0.0f, 0.8f, 0.0f);  // Floats up
         damping = 0.9f;
         break;
       case LASER:
         mass = 0.1f;
-        velocity = Vec3f(0.0f, 0.0f, 100.0f);    // 100m/s
+        velocity = Vec3f(100.0f, 0.0f, 0.0f);
         acceleration = Vec3f(0.0f, 0.0f, 0.0f);  // No gravity
         damping = 0.99f;
         break;

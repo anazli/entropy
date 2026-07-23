@@ -13,14 +13,24 @@ int main() {
   auto spaw_position = Vec3f(0.f, window.getSize().y / (2.f * SCALE), 0.f);
   BallisticDemo demo;
 
-  demo.fire(BallisticDemo::PISTOL, spaw_position);
-
   while (window.isOpen()) {
     while (const auto event = window.pollEvent()) {
       if (event->is<sf::Event::Closed>()) {
         window.close();
+      } else if (const auto key_pressed =
+                     event->getIf<sf::Event::KeyPressed>()) {
+        if (key_pressed->code == sf::Keyboard::Key::Num1) {
+          demo.fire(BallisticDemo::PISTOL, spaw_position);
+        } else if (key_pressed->code == sf::Keyboard::Key::Num2) {
+          demo.fire(BallisticDemo::ARTILLERY, spaw_position);
+        } else if (key_pressed->code == sf::Keyboard::Key::Num3) {
+          demo.fire(BallisticDemo::FIREBALL, spaw_position);
+        } else if (key_pressed->code == sf::Keyboard::Key::Num4) {
+          demo.fire(BallisticDemo::LASER, spaw_position);
+        }
       }
     }
+
     demo.update(dt);
 
     window.clear(sf::Color(20, 20, 25));
