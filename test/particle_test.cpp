@@ -7,19 +7,69 @@ using testing::Eq;
 
 class ParticleTest : public testing::Test {
  public:
-  void SetUp() override {}
-
-  void TearDown() override {}
+  Vec3f position;
+  Vec3f velocity;
+  Vec3f force;
+  Vec3f acceleration;
+  float damping;
+  float inverse_mass;
 };
 
-TEST_F(
-    ParticleTest,
-    GivenMovingParticleWhenNoForcesAreAppliedThenItKeepsMovingWithConstantVelocity) {
-  entropy::Particle p(1.f, Vec3f(), Vec3f(10.f, 0.f, 0.f), Vec3f(), 1.f,
-                      Vec3f());
+TEST_F(ParticleTest,
+       FirstLaw_ParticleKeepsMovingWithConstantSpeedWhenNoForceApplied) {
+  position = acceleration = force = Vec3f();
+  velocity = Vec3f(10.f, 0.f, 0.f);
+  damping = inverse_mass = 1.f;
+  entropy::Particle p(inverse_mass, position, velocity, acceleration, damping,
+                      force);
 
   p.Integrate(1);
 
-  ASSERT_THAT(p.GetPosition(), Eq(Vec3f(10.f, 0.f, 0.f)));
-  ASSERT_THAT(p.GetVelocity(), Eq(Vec3f(10.f, 0.f, 0.f)));
+  EXPECT_THAT(p.GetPosition(), Eq(Vec3f(10.f, 0.f, 0.f)));
+  EXPECT_THAT(p.GetVelocity(), Eq(Vec3f(10.f, 0.f, 0.f)));
+}
+
+TEST_F(ParticleTest, FreeFall_ConstantAccelerationIncreasesVelocity) {
+  position = Vec3f(0.f, 100.f, 0.f);
+  velocity = force = Vec3f();
+  acceleration = Vec3f(0.f, -10.f, 0.f);
+  inverse_mass = damping = 1.f;
+
+  entropy::Particle p(inverse_mass, position, velocity, acceleration, damping,
+                      force);
+
+  p.Integrate(1);
+  p.Integrate(1);
+
+  EXPECT_THAT(p.GetPosition(), Eq(Vec3f(0.f, 70.f, 0.f)));
+  EXPECT_THAT(p.GetVelocity(), Eq(Vec3f(0.f, -20.f, 0.f)));
+}
+
+TEST_F(ParticleTest, SecondLaw_ForcesCorrectlyApplied) {
+  position = velocity = acceleration = Vec3f(0.f, 0.f, 0.f);
+  force = Vec3f(20.f, 0.f, 0.f);
+  inverse_mass = 0.5f;
+  damping = 1.f;
+  entropy::Particle p(inverse_mass, position, velocity, acceleration, damping,
+                      force);
+
+  p.Integrate(1);
+
+  EXPECT_THAT(p.GetVelocity(), Eq(Vec3f(10.f, 0.f, 0.f)));
+  EXPECT_THAT(p.GetAcceleration(), Eq(Vec3f(10.f, 0.f, 0.f)));
+}
+
+TEST_F(ParticleTest, InfiniteMass_ImmovableObjectsStayStationary) {
+  position = Vec3f(5.f, 5.f, 5.f);
+  velocity = Vec3f(0.f, 0.f, 0.f);
+  acceleration = Vec3f(0.f, -9.81f, 0.f);
+  force = Vec3f(9999.f, 9999.f, 0.f);
+  inverse_mass = 0.f;
+  damping = 1.f;
+  entropy::Particle p(inverse_mass, position, velocity, acceleration, damping,
+                      force);
+  p.Integrate(1);
+
+  EXPECT_THAT(p.GetPosition(), Eq(Vec3f(5.f, 5.f, 5.f)));
+  EXPECT_THAT(p.GetVelocity(), Eq(Vec3f(0.f, 0.f, 0.f)));
 }

@@ -5,7 +5,7 @@
 namespace entropy {
 class Particle {
  public:
-  Particle(float mass, const Vec3f& position, const Vec3f& velocity,
+  Particle(float inverse_mass, const Vec3f& position, const Vec3f& velocity,
            const Vec3f& acceleration, float damping, const Vec3f& force);
   Vec3f GetPosition() const;
   Vec3f GetVelocity() const;
@@ -18,7 +18,7 @@ class Particle {
   Vec3f m_velocity;
   Vec3f m_acceleration;
   Vec3f m_force;
-  float m_inverse_mass{1.f};
+  float m_inverse_mass{0.f};
   float m_damping{0.99};
 };
 }  // namespace entropy
