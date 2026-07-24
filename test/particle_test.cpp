@@ -20,8 +20,7 @@ TEST_F(ParticleTest,
   position = acceleration = force = Vec3f();
   velocity = Vec3f(10.f, 0.f, 0.f);
   damping = inverse_mass = 1.f;
-  entropy::Particle p(inverse_mass, position, velocity, acceleration, damping,
-                      force);
+  entropy::Particle p(inverse_mass, position, velocity, acceleration, damping);
 
   p.Integrate(1);
 
@@ -35,8 +34,7 @@ TEST_F(ParticleTest, FreeFall_ConstantAccelerationIncreasesVelocity) {
   acceleration = Vec3f(0.f, -10.f, 0.f);
   inverse_mass = damping = 1.f;
 
-  entropy::Particle p(inverse_mass, position, velocity, acceleration, damping,
-                      force);
+  entropy::Particle p(inverse_mass, position, velocity, acceleration, damping);
 
   p.Integrate(1);
   p.Integrate(1);
@@ -50,8 +48,8 @@ TEST_F(ParticleTest, SecondLaw_ForcesCorrectlyApplied) {
   force = Vec3f(20.f, 0.f, 0.f);
   inverse_mass = 0.5f;
   damping = 1.f;
-  entropy::Particle p(inverse_mass, position, velocity, acceleration, damping,
-                      force);
+  entropy::Particle p(inverse_mass, position, velocity, acceleration, damping);
+  p.ApplyForce(force);
 
   p.Integrate(1);
 
@@ -66,8 +64,9 @@ TEST_F(ParticleTest, InfiniteMass_ImmovableObjectsStayStationary) {
   force = Vec3f(9999.f, 9999.f, 0.f);
   inverse_mass = 0.f;
   damping = 1.f;
-  entropy::Particle p(inverse_mass, position, velocity, acceleration, damping,
-                      force);
+  entropy::Particle p(inverse_mass, position, velocity, acceleration, damping);
+  p.ApplyForce(force);
+
   p.Integrate(1);
 
   EXPECT_THAT(p.GetPosition(), Eq(Vec3f(5.f, 5.f, 5.f)));
