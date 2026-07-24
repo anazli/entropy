@@ -45,7 +45,7 @@ class BallisticDemo {
         mass = 20.f;
         velocity = Vec3f(0.f, 0.f, 0.f);
         acceleration = Vec3f(0.f, 0.f, 0.f);
-        force = Vec3f(3500.f, 3500.f, 0.f);
+        force = Vec3f(4000.f, 4000.f, 0.f);
         damping = 0.99f;
         break;
     }
