@@ -24,8 +24,8 @@ TEST_F(ParticleTest,
 
   p.Integrate(1);
 
-  EXPECT_THAT(p.GetPosition(), Eq(Vec3f(10.f, 0.f, 0.f)));
-  EXPECT_THAT(p.GetVelocity(), Eq(Vec3f(10.f, 0.f, 0.f)));
+  EXPECT_THAT(p.Position(), Eq(Vec3f(10.f, 0.f, 0.f)));
+  EXPECT_THAT(p.Velocity(), Eq(Vec3f(10.f, 0.f, 0.f)));
 }
 
 TEST_F(ParticleTest, FreeFall_ConstantAccelerationIncreasesVelocity) {
@@ -39,8 +39,8 @@ TEST_F(ParticleTest, FreeFall_ConstantAccelerationIncreasesVelocity) {
   p.Integrate(1);
   p.Integrate(1);
 
-  EXPECT_THAT(p.GetPosition(), Eq(Vec3f(0.f, 70.f, 0.f)));
-  EXPECT_THAT(p.GetVelocity(), Eq(Vec3f(0.f, -20.f, 0.f)));
+  EXPECT_THAT(p.Position(), Eq(Vec3f(0.f, 70.f, 0.f)));
+  EXPECT_THAT(p.Velocity(), Eq(Vec3f(0.f, -20.f, 0.f)));
 }
 
 TEST_F(ParticleTest, SecondLaw_ForcesCorrectlyApplied) {
@@ -53,8 +53,8 @@ TEST_F(ParticleTest, SecondLaw_ForcesCorrectlyApplied) {
 
   p.Integrate(1);
 
-  EXPECT_THAT(p.GetVelocity(), Eq(Vec3f(10.f, 0.f, 0.f)));
-  EXPECT_THAT(p.GetAcceleration(), Eq(Vec3f(10.f, 0.f, 0.f)));
+  EXPECT_THAT(p.Velocity(), Eq(Vec3f(10.f, 0.f, 0.f)));
+  EXPECT_THAT(p.Acceleration(), Eq(Vec3f(10.f, 0.f, 0.f)));
 }
 
 TEST_F(ParticleTest, InfiniteMass_ImmovableObjectsStayStationary) {
@@ -69,6 +69,6 @@ TEST_F(ParticleTest, InfiniteMass_ImmovableObjectsStayStationary) {
 
   p.Integrate(1);
 
-  EXPECT_THAT(p.GetPosition(), Eq(Vec3f(5.f, 5.f, 5.f)));
-  EXPECT_THAT(p.GetVelocity(), Eq(Vec3f(0.f, 0.f, 0.f)));
+  EXPECT_THAT(p.Position(), Eq(Vec3f(5.f, 5.f, 5.f)));
+  EXPECT_THAT(p.Velocity(), Eq(Vec3f(0.f, 0.f, 0.f)));
 }

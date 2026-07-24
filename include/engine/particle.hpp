@@ -8,14 +8,14 @@ class Particle {
   Particle() = default;
   Particle(float inverse_mass, const Vec3f& position, const Vec3f& velocity,
            const Vec3f& acceleration, float damping);
-  Vec3f GetPosition() const;
-  Vec3f GetVelocity() const;
-  Vec3f GetAcceleration() const;
-  float GetMass() const;
+  Vec3f Position() const;
+  Vec3f Velocity() const;
+  Vec3f Acceleration() const;
+  float Mass() const;
 
   void ApplyForce(const Vec3f& force);
-  void AddForceAccumulator(const Vec3f& force);
-  void ClearForceAccumulator();
+  void AddForce(const Vec3f& force);
+  void ClearForces();
 
   void Integrate(float duration);
 

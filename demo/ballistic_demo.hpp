@@ -51,7 +51,7 @@ class BallisticDemo {
     }
     m_projectile = entropy::Particle(1. / mass, spawn_position, velocity,
                                      acceleration, damping);
-    m_projectile.AddForceAccumulator(force);
+    m_projectile.AddForce(force);
   }
 
   void fire(ProjectileType type, const Vec3f& spawn_position) {
@@ -65,9 +65,9 @@ class BallisticDemo {
     }
 
     m_projectile.Integrate(dt);
-    m_projectile.ClearForceAccumulator();
+    m_projectile.ClearForces();
 
-    if (m_projectile.GetPosition().y <= 0.f) {
+    if (m_projectile.Position().y <= 0.f) {
       m_is_active = false;
     }
   }

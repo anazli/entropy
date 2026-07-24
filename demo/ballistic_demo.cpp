@@ -42,14 +42,14 @@ int main() {
     demo.update(dt);
 
     if (type == BallisticDemo::CUSTOM) {
-      Vec3f gravity(0.f, -9.81 * demo.getProjectile().GetMass(), 0.f);
-      demo.getProjectile().AddForceAccumulator(gravity);
+      Vec3f gravity(0.f, -9.81 * demo.getProjectile().Mass(), 0.f);
+      demo.getProjectile().AddForce(gravity);
     }
     window.clear(sf::Color(20, 20, 25));
 
-    float x = demo.getProjectile().GetPosition().x * SCALE;
+    float x = demo.getProjectile().Position().x * SCALE;
     float y = static_cast<float>(window.getSize().y) -
-              (demo.getProjectile().GetPosition().y * SCALE);
+              (demo.getProjectile().Position().y * SCALE);
 
     sf::CircleShape shape(8.0f);
     shape.setFillColor(sf::Color::Green);

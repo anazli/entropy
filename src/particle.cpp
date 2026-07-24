@@ -14,21 +14,19 @@ Particle::Particle(float inverse_mass, const Vec3f& position,
       m_acceleration(acceleration),
       m_damping(damping) {}
 
-Vec3f Particle::GetPosition() const { return m_position; }
+Vec3f Particle::Position() const { return m_position; }
 
-Vec3f Particle::GetVelocity() const { return m_velocity; }
+Vec3f Particle::Velocity() const { return m_velocity; }
 
-Vec3f Particle::GetAcceleration() const { return m_acceleration; }
+Vec3f Particle::Acceleration() const { return m_acceleration; }
 
-float Particle::GetMass() const { return 1. / m_inverse_mass; }
+float Particle::Mass() const { return 1. / m_inverse_mass; }
 
 void Particle::ApplyForce(const Vec3f& force) { m_force = force; }
 
-void Particle::AddForceAccumulator(const Vec3f& force) {
-  m_force = m_force + force;
-}
+void Particle::AddForce(const Vec3f& force) { m_force = m_force + force; }
 
-void Particle::ClearForceAccumulator() { m_force = Vec3f(); }
+void Particle::ClearForces() { m_force = Vec3f(); }
 
 void Particle::Integrate(float dt) {
   assert(dt > 0.f);
