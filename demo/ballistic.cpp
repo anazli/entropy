@@ -1,4 +1,4 @@
-#include "ballistic_demo.hpp"
+#include "ballistic.hpp"
 
 #include <SFML/Graphics.hpp>
 
@@ -6,11 +6,11 @@ const float SCALE = 10.f;  // 1 meter = 10 pixels
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(sf::Vector2u(1200, 800)),
-                          "Entropy Engine Demo");
+                          "Ballistic Demo");
   auto frame_limit = 60;
   window.setFramerateLimit(frame_limit);
   const float dt = 1.f / static_cast<float>(frame_limit);
-  auto spaw_position = Vec3f(0.f, window.getSize().y / (2.f * SCALE), 0.f);
+  auto spawn_position = Vec3f(0.f, window.getSize().y / (2.f * SCALE), 0.f);
   BallisticDemo::ProjectileType type;
   BallisticDemo demo;
 
@@ -22,19 +22,19 @@ int main() {
                      event->getIf<sf::Event::KeyPressed>()) {
         if (key_pressed->code == sf::Keyboard::Key::Num1) {
           type = BallisticDemo::PISTOL;
-          demo.fire(type, spaw_position);
+          demo.fire(type, spawn_position);
         } else if (key_pressed->code == sf::Keyboard::Key::Num2) {
           type = BallisticDemo::ARTILLERY;
-          demo.fire(type, spaw_position);
+          demo.fire(type, spawn_position);
         } else if (key_pressed->code == sf::Keyboard::Key::Num3) {
           type = BallisticDemo::FIREBALL;
-          demo.fire(type, spaw_position);
+          demo.fire(type, spawn_position);
         } else if (key_pressed->code == sf::Keyboard::Key::Num4) {
           type = BallisticDemo::LASER;
-          demo.fire(type, spaw_position);
+          demo.fire(type, spawn_position);
         } else if (key_pressed->code == sf::Keyboard::Key::Num5) {
           type = BallisticDemo::CUSTOM;
-          demo.fire(type, spaw_position);
+          demo.fire(type, spawn_position);
         }
       }
     }

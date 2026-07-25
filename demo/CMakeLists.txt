@@ -14,8 +14,16 @@ FetchContent_MakeAvailable(SFML)
 
 set(BALLISTIC_DEMO ballistic-demo)
 add_executable(${BALLISTIC_DEMO}
-  ballistic_demo.cpp
-  ballistic_demo.hpp
+  ballistic.cpp
+  ballistic.hpp
 )
 target_include_directories(${BALLISTIC_DEMO} PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(${BALLISTIC_DEMO} PRIVATE entropy sfml-graphics sfml-window sfml-system)
+
+set(FIREWORK_DEMO firework-demo)
+add_executable(${FIREWORK_DEMO}
+  firework.cpp
+  firework.hpp
+)
+target_include_directories(${FIREWORK_DEMO} PRIVATE ${CMAKE_SOURCE_DIR}/include)
+target_link_libraries(${FIREWORK_DEMO} PRIVATE entropy sfml-graphics sfml-window sfml-system)
