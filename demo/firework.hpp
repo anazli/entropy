@@ -48,10 +48,10 @@ class FireworkDemo {
       child.particle = entropy::Particle(inverse_mass, position, velocity,
                                          acceleration, damping);
       child.age = age;
-      if (rnd(m_gen) < 0.1f) {
-        child.is_parent = false;
-      } else {
+      if (rnd(m_gen) < 0.2f) {
         child.is_parent = true;
+      } else {
+        child.is_parent = false;
       }
       m_fireworks.push_back(child);
     }

@@ -29,11 +29,10 @@ int main() {
 
     window.clear(sf::Color(20, 20, 25));
 
-    sf::CircleShape rocket(3.0f);
+    sf::CircleShape rocket(4.0f);
     rocket.setFillColor(sf::Color::Red);
 
-    sf::CircleShape child(1.0f);
-    child.setFillColor(sf::Color::Red);
+    sf::CircleShape child(2.0f);
 
     for (const auto& firework : demo.getFireworks()) {
       float x = firework.particle.Position().x * SCALE;
@@ -49,7 +48,7 @@ int main() {
         float life_ratio = std::clamp(firework.age / 1.5f, 0.f, 1.f);
         unsigned char alpha = static_cast<unsigned char>(255.f * life_ratio);
 
-        child.setFillColor(sf::Color(255, 160, 50, alpha));
+        child.setFillColor(sf::Color(255, 255, 50, alpha));
         child.setPosition(pos);
         window.draw(child);
       }
